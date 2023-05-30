@@ -1,0 +1,38 @@
+
+
+.board{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+
+
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(3, 0fr);
+}
+
+
+.square{
+    width: 100px;
+    height: 100px;
+    font-size: 5rem;
+    color: blueviolet;
+    border: solid 1px black;
+}
+
+.square_o{
+    background-color: aquamarine;
+}
+
+.square_x{
+    background-color: darkgoldenrod;
+}
+
+.reset{
+    margin: 2px;
+    background-color: darkturquoise;
+}

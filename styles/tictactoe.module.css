@@ -1,38 +1,115 @@
-
-
-.board{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
+.board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--background);
 }
 
-
-
-
-.grid{
-    display: grid;
-    grid-template-columns: repeat(3, 0fr);
+.top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 25%;
 }
 
-
-.square{
-    width: 100px;
-    height: 100px;
-    font-size: 5rem;
-    color: blueviolet;
-    border: solid 1px black;
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50%;
 }
 
-.square_o{
+.bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 25%;
+}
+
+.h1 {
+  font-size: 5rem;
+  color: var(--colorWhite);
+}
+
+.h4 {
+  font-size: 2rem;
+  color: var(--colorWhite);
+}
+
+.p {
+  font-size: 1.6rem;
+  color: var(--colorWhite);
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--colorWhite);
+}
+
+.input {
+  font-size: 1rem;
+  color: var(--colorBlack);
+  margin: 5px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.players {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 50%;
+}
+
+.winner {
+  display: flex;
+  height: 30px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 5px;
+  column-gap: 5px;
+  box-sizing: border-box;
+}
+
+.square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Varela";
+  width: 100px;
+  height: 100px;
+  font-size: 5rem;
+  color: var(--colorO);
+  border: solid 5px var(--colorX);
+  border-radius: 12px;
+}
+
+/* .square_o{
     background-color: aquamarine;
 }
 
 .square_x{
     background-color: darkgoldenrod;
-}
+} */
 
-.reset{
-    margin: 2px;
-    background-color: darkturquoise;
+.reset {
+  padding: 2px 2px;
+  margin-bottom: 50px;
+  background-color: var(--colorWhite);
+  box-sizing: border-box;
+  border-radius: 15px;
+  width: 100px;
 }

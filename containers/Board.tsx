@@ -24,22 +24,30 @@ function calculateWinner(squares: Player[]) {
 }
 
 const Board = () => {
-  const [squares, setSquares] = useState(Array(9).fill(null));
-
+  const [squares, setSquares] = useState<Array<Player>>(Array(9).fill(null));
   const [currentPlayer, setCurrentPlayer] = useState<"X" | "O">(
     Math.round(Math.random() * 1) === 1 ? "X" : "O"
   );
-
-
-
   const [winner, setWinner] = useState<Player>(null);
+  const [player1Name, setPlayer1Name] = useState("");
+  const [player2Name, setPlayer2Name] = useState("");
+  const [player1Score, setPlayer1Score] = useState(0);
+  const [player2Score, setPlayer2Score] = useState(0);
 
-  function reset() {
+  function newGame() {
+    setSquares(Array(9).fill(null));
+    setWinner(null);
+    setCurrentPlayer(Math.round(Math.random() * 1) === 1 ? "X" : "O");
+  }
+
+  function resetAll() {
     setSquares(Array(9).fill(null));
     setWinner(null);
     setCurrentPlayer(Math.round(Math.random() * 1) === 1 ? "X" : "O");
     setPlayer1Name("");
     setPlayer2Name("");
+    setPlayer1Score(0);
+    setPlayer2Score(0);
   }
 
   function setSquareValue(index: number) {
@@ -57,28 +65,23 @@ const Board = () => {
     const w = calculateWinner(squares);
     if (w) {
       setWinner(w);
-    }
-    if (!w && !squares.filter((square) => !square).length) {
-      setWinner("Tie");
+      if (w === "X") {
+        setPlayer1Score((prevScore) => prevScore + 1);
+      } else if (w === "O") {
+        setPlayer2Score((prevScore) => prevScore + 1);
+      }
     }
   }, [squares]);
-
-  const [player1Name, setPlayer1Name] = useState("");
-  const [player2Name, setPlayer2Name] = useState("");
-
-
 
   return (
     <>
       <div className={styles.board}>
         <div className={styles.top}>
           <h1 className={styles.h1}>Tic Tac Toe</h1>
-          <h4 className={styles.h4}>
-            Olá {currentPlayer === "X" ? player1Name : player2Name}, é a sua vez de jogar
-          </h4>
+
           <div className={styles.players}>
             <label className={styles.label} htmlFor="player1">
-              Player 1: {" "}
+              Player 1:{" "}
             </label>
             <input
               className={styles.input}
@@ -88,7 +91,7 @@ const Board = () => {
               onChange={(e) => setPlayer1Name(e.target.value)}
             />
             <label className={styles.label} htmlFor="player2">
-              Player 2: {" "}
+              Player 2:{" "}
             </label>
             <input
               className={styles.input}
@@ -98,6 +101,10 @@ const Board = () => {
               onChange={(e) => setPlayer2Name(e.target.value)}
             />
           </div>
+          <h4 className={styles.h4}>
+            Olá {currentPlayer === "X" ? player1Name : player2Name}, é a sua vez
+            de jogar
+          </h4>
         </div>
 
         <div className={styles.game}>
@@ -118,14 +125,30 @@ const Board = () => {
         <div className={styles.bottom}>
           <div className={styles.winner}>
             {winner && winner !== "Tie" && (
-              <p className={styles.p}>Parabéns {winner === "X" ? player1Name : player2Name}, você venceu!</p>
+              <p className={styles.p}>
+                {winner === "X" ? player1Name : player2Name} venceu!
+              </p>
             )}
             {winner && winner === "Tie" && (
               <p className={styles.p}>Houve um empate</p>
             )}
           </div>
-          <button className={styles.reset} onClick={reset}>
-            Reiniciar
+
+          <button className={styles.newgame} onClick={newGame}>
+            NOVA PARTIDA
+          </button>
+          <div className={styles.score}>
+            <h4 className={styles.h4}>Placar</h4>
+            <p>
+              {player1Name}: {player1Score}
+            </p>
+            <p>
+              {player2Name}: {player2Score}
+            </p>
+          </div>
+
+          <button className={styles.resetall} onClick={resetAll}>
+            NOVOS JOGADORES
           </button>
         </div>
       </div>
